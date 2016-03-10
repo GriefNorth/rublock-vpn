@@ -93,6 +93,10 @@ down)
   ;;
 esac
 ```
+* На странице `LAN > DHCP Server` допишите в поле `Custom Configuration File "dnsmasq.conf"` строчку:
+```
+conf-file=/opt/etc/rublock.dnsmasq
+```
 
 Перегрузите роутер для того, чтобы настройки вступили в силу.
 
