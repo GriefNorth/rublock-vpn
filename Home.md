@@ -35,7 +35,7 @@ start|update)
         [ -d '/opt/etc' ] || exit 0
         # Create new rublock ipset and fill it with IPs from list
         if [ ! -z "$(ipset --swap rublock rublock 2>&1 | grep 'given name does not exist')" ] ; then
-        ipset -N rublock iphash
+                ipset -N rublock iphash
                 for IP in $(cat /opt/etc/rublock.ips) ; do
                         ipset -A rublock $IP
                 done
