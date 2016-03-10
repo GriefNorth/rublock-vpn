@@ -24,27 +24,39 @@ blupdate.lua
 
 
 ### Настройка прошивки
+* Отредактируйте `/opt/etc/init.d/S10iptables`:
+```
+#!/bin/sh
+
+case "$1" in
+start|update)
+        # add iptables custom rules
+        echo "firewall started"
+        [ -d '/opt/etc' ] || exit 0
+        # Create new rublock ipset and fill it with IPs from list
+        if [ ! -z "$(ipset --swap rublock rublock 2>&1 | grep 'given name does not exist')" ] ; then
+        ipset -N rublock iphash
+                for IP in $(cat /opt/etc/rublock.ips) ; do
+                        ipset -A rublock $IP
+                done
+        fi
+        iptables -A PREROUTING -t mangle -m set --match-set rublock dst,src -j MARK --set-mark 1
+        ;;
+stop)
+        # delete iptables custom rules
+        echo "firewall stopped"
+        ;;
+*)
+        echo "Usage: $0 {start|stop|update}"
+        exit 1
+        ;;
+esac
+```
 
 * В веб-интерфейсе роутера на странице `Customization > Scripts` отредактируйте поле `Run After Router Started`, раскоментировав две строчки:
 ```
 modprobe ip_set_hash_ip
 modprobe xt_set
-```
-* На той же странице отредактируйте скрипт `Run After Firewall Rules Restarted`, приведя его к виду:
-```
-#!/bin/sh
-
-### Custom user script
-### Called after internal iptables reconfig (firewall update)
-
-# Create new rublock ipset and fill it with IPs from list
-if [ -z "$(ipset --swap rublock rublock 2>&1 | grep 'given name does not exist')" ] ; then
-    ipset -N rublock iphash
-    for IP in $(cat /opt/etc/rublock.ips) ; do
-	ipset -A rublock $IP
-    done
-fi
-
 ```
 * На странице `VPN Client` в поле `OpenVPN Extended Configuration` допишите следующую команду:
 ```
