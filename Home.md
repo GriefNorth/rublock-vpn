@@ -9,10 +9,12 @@
 ### Установка скриптов
 * Установите необходимые пакеты:
 ```
-opkg install luasocket
+opkg install lua
 ```
 * Скачайте скрипт формирования конфига для dnsmasq, сделайте его исполняемым:
 ```
+mkdir /opt/lib/lua
+wget --no-check-certificate -O /opt/lib/lua/ltn12.lua https://raw.githubusercontent.com/diegonehab/luasocket/master/src/ltn12.lua
 wget --no-check-certificate -O /opt/bin/blupdate.lua https://raw.githubusercontent.com/DontBeAPadavan/rublock-via-vpn/master/opt/bin/blupdate.lua
 chmod +x /opt/bin/blupdate.lua
 ```
