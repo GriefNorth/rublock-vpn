@@ -17,4 +17,4 @@ sed -i '$a54.229.110.205' rublock.ips
 sed -i '$a18.205.93.0\/25' rublock.ips
 
 echo Restart dnsmasq
-killall -sighup dnsmasq
+restart_dhcpd; restart_dns
