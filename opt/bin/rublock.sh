@@ -14,6 +14,7 @@ sed -i '$aipset=\/opendesktop.org\/rublock' rublock.dnsmasq
 sed -i '$aipset=\/pling.com\/rublock' rublock.dnsmasq
 sed -i '$a52.77.181.198' rublock.ips
 sed -i '$a54.229.110.205' rublock.ips
+sed -i '$a18.205.93.0\/25' rublock.ips
 
 echo Restart dnsmasq
 killall -sighup dnsmasq
