@@ -57,6 +57,7 @@ ipset=/webmoney.ru/rublock
 ipset=/wmeuro.eu/rublock
 ipset=/wmid.com/rublock
 ipset=/wmtransfer.com/rublock
+ipset=/yadi.sk/rublock
 ipset=/yandex.net/rublock
 ipset=/yandex.ru/rublock
 ipset=/yandex.ua/rublock
