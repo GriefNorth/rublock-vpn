@@ -1,1 +1,1 @@
-Детали установки в [Wiki](https://bitbucket.org/blackcofee/rublock-vpn/wiki/Home)
+Детали установки в [Wiki](https://github.com/blackcofee/rublock-vpn/wiki)
