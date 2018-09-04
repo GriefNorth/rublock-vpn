@@ -1,7 +1,4 @@
 ipset=/vk.com/rublock
-ipset=/userapi.com/rublock
-ipset=/vigo.ru/rublock
-ipset=/vk-cdn.net/rublock
 ipset=/mail.ru/rublock
 ipset=/imgsmail.ru/rublock
 ipset=/mradx.net/rublock
