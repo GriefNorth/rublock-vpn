@@ -12,6 +12,8 @@ sed -i '$aipset=\/nnm-club.ws\/rublock' rublock.dnsmasq
 sed -i '$aipset=\/gnome-look.org\/rublock' rublock.dnsmasq
 sed -i '$aipset=\/opendesktop.org\/rublock' rublock.dnsmasq
 sed -i '$aipset=\/pling.com\/rublock' rublock.dnsmasq
+sed -i '$aipset=\/7-zip.org\/rublock' rublock.dnsmasq
+sed -i '$aipset=\/reactos.org\/rublock' rublock.dnsmasq
 sed -i '$a52.77.181.198' rublock.ips
 sed -i '$a54.229.110.205' rublock.ips
 sed -i '$a18.205.93.0\/25' rublock.ips
