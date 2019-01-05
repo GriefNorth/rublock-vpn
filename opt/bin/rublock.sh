@@ -30,6 +30,5 @@ sed -i '$a149.154.168.0\/22' rublock.ips
 sed -i '$a149.154.172.0\/22' rublock.ips
 
 echo Restart dnsmasq
-ipset flush rublock
 restart_dhcpd
 restart_firewall
