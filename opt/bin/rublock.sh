@@ -14,6 +14,8 @@ sed -i '$aipset=\/opendesktop.org\/rublock' rublock.dnsmasq
 sed -i '$aipset=\/pling.com\/rublock' rublock.dnsmasq
 sed -i '$aipset=\/7-zip.org\/rublock' rublock.dnsmasq
 sed -i '$aipset=\/reactos.org\/rublock' rublock.dnsmasq
+sed -i '$aipset=\/nextcloud.com\/rublock' rublock.dnsmasq
+sed -i '$aipset=\/git.openwrt.org/\/rublock' rublock.dnsmasq
 sed -i '$a52.77.181.198' rublock.ips
 sed -i '$a54.229.110.205' rublock.ips
 sed -i '$a18.205.93.0\/25' rublock.ips
@@ -28,5 +30,6 @@ sed -i '$a149.154.168.0\/22' rublock.ips
 sed -i '$a149.154.172.0\/22' rublock.ips
 
 echo Restart dnsmasq
+ipset flush rublock
 restart_dhcpd
 restart_firewall
