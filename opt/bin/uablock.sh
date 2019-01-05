@@ -9,5 +9,6 @@ cd /opt/etc/
 sed -i 's/.*/ipset=\/&\/rublock/' rublock.dnsmasq
 
 echo Restart dnsmasq
+ipset flush rublock
 restart_dhcpd
 restart_firewall
