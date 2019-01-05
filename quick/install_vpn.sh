@@ -51,7 +51,7 @@ echo Add IP Set Module
 cd /etc/storage/
 sed -i '$a' start_script.sh
 sed -i '$a### Example - load ipset modules' start_script.sh
-sed -i '$amodprobe ip_set_hash_ip' start_script.sh
+sed -i '$amodprobe ip_set_hash_net' start_script.sh
 sed -i '$amodprobe xt_set' start_script.sh
 
 echo Add option client.conf
