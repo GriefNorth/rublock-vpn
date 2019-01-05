@@ -29,7 +29,7 @@ start|update)
         [ -d '/opt/etc' ] || exit 0
         # Create new rublock ipset and fill it with IPs from list
         if [ ! -z "$(ipset --swap rublock rublock 2>&1 | grep 'given name does not exist')" ] ; then
-                ipset -N rublock iphash
+                ipset -N rublock nethash
                 for IP in $(cat /opt/etc/rublock.ips) ; do
                         ipset -A rublock $IP
                 done
@@ -63,7 +63,7 @@ sed -i '$a' client.conf
 sed -i '$a### Noexec' client.conf
 sed -i '$aroute-noexec' client.conf
 
-Make vpnc_server_script.sh
+echo Make vpnc_server_script.sh
 rm -rf /etc/storage/vpnc_server_script.sh
 
 cat >> /etc/storage/vpnc_server_script.sh << 'EOF'
