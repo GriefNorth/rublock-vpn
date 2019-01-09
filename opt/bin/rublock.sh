@@ -29,7 +29,7 @@ sed -i '$a149.154.164.0\/22' rublock.ips
 sed -i '$a149.154.168.0\/22' rublock.ips
 sed -i '$a149.154.172.0\/22' rublock.ips
 
-echo Add ip's
+echo Add ip
 ipset flush rublock
 
 for IP in $(cat /opt/etc/rublock.ips) ; do
