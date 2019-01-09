@@ -8,7 +8,7 @@ echo Generation Block List
 cd /opt/etc/
 sed -i 's/.*/ipset=\/&\/rublock/' rublock.dnsmasq
 
-echo Add ip's
+echo Add ip
 ipset flush rublock
 
 for IP in $(cat /opt/etc/rublock.ips) ; do
