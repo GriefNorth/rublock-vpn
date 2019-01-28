@@ -12,14 +12,19 @@ wget -O /opt/lib/lua/ltn12.lua https://raw.githubusercontent.com/diegonehab/luas
 wget -O /opt/bin/blupdate.lua https://raw.githubusercontent.com/blackcofee/rublock-vpn/master/opt/bin/blupdate.lua
 wget -O /opt/bin/rublock.sh https://raw.githubusercontent.com/blackcofee/rublock-vpn/master/opt/bin/rublock.sh
 
+echo Load Ipset Modules
+modprobe ip_set_hash_net
+modprobe xt_set
+ipset -N rublock nethash
+
 echo Block Site
 chmod +x /opt/bin/blupdate.lua /opt/bin/rublock.sh
 rublock.sh
 
-echo Make S10iptables
-rm -rf /opt/etc/init.d/S10iptables
+echo Make update
+rm -rf /opt/bin/update_iptables.sh
 
-cat >> /opt/etc/init.d/S10iptables << 'EOF'
+cat >> /opt/bin/update_iptables.sh << 'EOF'
 #!/bin/sh
 
 case "$1" in
@@ -47,6 +52,8 @@ stop)
 esac
 EOF
 
+chmod +x /opt/bin/update_iptables.sh
+
 echo Add IP Set Module
 cd /etc/storage/
 sed -i '$a' start_script.sh
@@ -54,7 +61,7 @@ sed -i '$a### Example - load ipset modules' start_script.sh
 sed -i '$amodprobe ip_set_hash_net' start_script.sh
 sed -i '$amodprobe xt_set' start_script.sh
 
-echo Add option client.conf
+echo Add option client
 cd /etc/storage/openvpn/client/
 sed -i '$a' client.conf
 sed -i '$a### Nocache' client.conf
@@ -63,7 +70,7 @@ sed -i '$a' client.conf
 sed -i '$a### Noexec' client.conf
 sed -i '$aroute-noexec' client.conf
 
-echo Make vpnc_server_script.sh
+echo Make vpnc script
 rm -rf /etc/storage/vpnc_server_script.sh
 
 cat >> /etc/storage/vpnc_server_script.sh << 'EOF'
