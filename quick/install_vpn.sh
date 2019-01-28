@@ -12,14 +12,9 @@ wget -O /opt/lib/lua/ltn12.lua https://raw.githubusercontent.com/diegonehab/luas
 wget -O /opt/bin/blupdate.lua https://raw.githubusercontent.com/blackcofee/rublock-vpn/master/opt/bin/blupdate.lua
 wget -O /opt/bin/rublock.sh https://raw.githubusercontent.com/blackcofee/rublock-vpn/master/opt/bin/rublock.sh
 
-echo Load Ipset Modules
-modprobe ip_set_hash_net
-modprobe xt_set
-ipset -N rublock nethash
-
 echo Block Site
 chmod +x /opt/bin/blupdate.lua /opt/bin/rublock.sh
-rublock.sh
+blupdate.lua
 
 echo Make update
 rm -rf /opt/bin/update_iptables.sh
@@ -64,10 +59,10 @@ sed -i '$amodprobe xt_set' start_script.sh
 echo Add option client
 cd /etc/storage/openvpn/client/
 sed -i '$a' client.conf
-sed -i '$a### Nocache' client.conf
+sed -i '$a### nocache' client.conf
 sed -i '$aauth-nocache' client.conf
 sed -i '$a' client.conf
-sed -i '$a### Noexec' client.conf
+sed -i '$a### noexec' client.conf
 sed -i '$aroute-noexec' client.conf
 
 echo Make vpnc script
@@ -108,7 +103,7 @@ chmod +x /etc/storage/vpnc_server_script.sh
 echo Add entry dnsmasq
 cd /etc/storage/dnsmasq/
 sed -i '$a' dnsmasq.conf
-sed -i '$a### RuBlock' dnsmasq.conf
+sed -i '$a### rublock' dnsmasq.conf
 sed -i '$aconf-file=/opt/etc/rublock.dnsmasq' dnsmasq.conf
 
 echo Add Crontab tasks
