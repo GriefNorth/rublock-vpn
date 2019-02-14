@@ -1,7 +1,7 @@
 #!/opt/bin/lua
 
 local config = {
-    blSource = "rublacklist", -- antizapret или rublacklist
+    blSource = "antizapret", -- antizapret или rublacklist
     groupBySld = 16, -- количество поддоменов после которого в список вносится весь домен второго уровня целиком
     neverGroupMasks = { "^%a%a%a?.%a%a$" }, -- не распространять на org.ru, net.ua и аналогичные
     neverGroupDomains = { ["livejournal.com"] = true, ["facebook.com"] = true , ["vk.com"] = true },
