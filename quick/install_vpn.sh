@@ -17,7 +17,7 @@ chmod +x /opt/bin/blupdate.lua /opt/bin/rublock.sh
 blupdate.lua
 
 echo Make update
-rm -rf /opt/bin/update_iptables.sh
+cat /dev/null > /opt/bin/update_iptables.sh
 
 cat >> /opt/bin/update_iptables.sh << 'EOF'
 #!/bin/sh
@@ -47,8 +47,6 @@ stop)
 esac
 EOF
 
-chmod +x /opt/bin/update_iptables.sh
-
 echo Add IPSet Module
 cd /etc/storage/
 sed -i '$a' start_script.sh
@@ -66,7 +64,7 @@ sed -i '$a### noexec' client.conf
 sed -i '$aroute-noexec' client.conf
 
 echo Make vpnc script
-rm -rf /etc/storage/vpnc_server_script.sh
+cat /dev/null > /etc/storage/vpnc_server_script.sh
 
 cat >> /etc/storage/vpnc_server_script.sh << 'EOF'
 #!/bin/sh
@@ -97,8 +95,6 @@ down)
   ;;
 esac
 EOF
-
-chmod +x /etc/storage/vpnc_server_script.sh
 
 echo Add entry dnsmasq
 cd /etc/storage/dnsmasq/
