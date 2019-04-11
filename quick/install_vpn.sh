@@ -49,7 +49,7 @@ EOF
 
 chmod +x /opt/bin/update_iptables.sh
 
-echo Add IP Set Module
+echo Add IPSet Module
 cd /etc/storage/
 sed -i '$a' start_script.sh
 sed -i '$a### Example - load ipset modules' start_script.sh
