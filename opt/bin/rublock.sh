@@ -34,5 +34,4 @@ ipset -A rublock $IP
 done
 
 echo Restart dnsmasq
-restart_dhcpd
-restart_firewall
+killall -q dnsmasq
