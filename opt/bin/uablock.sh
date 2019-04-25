@@ -17,3 +17,4 @@ done
 
 echo Restart dnsmasq
 killall -q dnsmasq
+/usr/sbin/dnsmasq
