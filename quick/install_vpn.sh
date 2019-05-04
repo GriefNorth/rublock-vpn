@@ -5,16 +5,21 @@ echo Install Packages
 opkg install lua
 
 echo Make Dir
-mkdir /opt/lib/lua
+mkdir -p /opt/lib/lua
 
 echo Download Scripts
 wget -O /opt/lib/lua/ltn12.lua https://raw.githubusercontent.com/diegonehab/luasocket/master/src/ltn12.lua
 wget -O /opt/bin/blupdate.lua https://raw.githubusercontent.com/blackcofee/rublock-vpn/master/opt/bin/blupdate.lua
 wget -O /opt/bin/rublock.sh https://raw.githubusercontent.com/blackcofee/rublock-vpn/master/opt/bin/rublock.sh
 
+echo Load Ipset Modules
+modprobe ip_set_hash_net
+modprobe xt_set
+ipset -N rublock nethash
+
 echo Block Site
 chmod +x /opt/bin/blupdate.lua /opt/bin/rublock.sh
-blupdate.lua
+rublock.sh
 
 echo Make update
 cat /dev/null > /opt/bin/update_iptables.sh
