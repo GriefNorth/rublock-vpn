@@ -101,7 +101,7 @@ down)
 esac
 EOF
 
-echo Add entries dnsmasq
+echo Add entries to dnsmasq
 cd /etc/storage/dnsmasq/
 sed -i '$a' dnsmasq.conf
 sed -i '$a### rublock' dnsmasq.conf
