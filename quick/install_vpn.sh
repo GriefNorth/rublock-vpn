@@ -1,27 +1,27 @@
-echo Check Update
+echo Check update
 opkg update && opkg upgrade
 
-echo Install Packages
+echo Install packages
 opkg install lua
 
-echo Make Dir
+echo Make directories
 mkdir -p /opt/lib/lua
 
-echo Download Scripts
+echo Download scripts
 wget -O /opt/lib/lua/ltn12.lua https://raw.githubusercontent.com/diegonehab/luasocket/master/src/ltn12.lua
 wget -O /opt/bin/blupdate.lua https://raw.githubusercontent.com/blackcofee/rublock-vpn/master/opt/bin/blupdate.lua
 wget -O /opt/bin/rublock.sh https://raw.githubusercontent.com/blackcofee/rublock-vpn/master/opt/bin/rublock.sh
 
-echo Load Ipset Modules
+echo Load ipset modules
 modprobe ip_set_hash_net
 modprobe xt_set
 ipset -N rublock nethash
 
-echo Block Site
+echo Launch scripts
 chmod +x /opt/bin/blupdate.lua /opt/bin/rublock.sh
 rublock.sh
 
-echo Make update
+echo Make config iptables
 cat /dev/null > /opt/bin/update_iptables.sh
 
 cat >> /opt/bin/update_iptables.sh << 'EOF'
@@ -52,14 +52,14 @@ stop)
 esac
 EOF
 
-echo Add IPSet Module
+echo Add ipset modules
 cd /etc/storage/
 sed -i '$a' start_script.sh
 sed -i '$a### Example - load ipset modules' start_script.sh
 sed -i '$amodprobe ip_set_hash_net' start_script.sh
 sed -i '$amodprobe xt_set' start_script.sh
 
-echo Add option client
+echo Add options client
 cd /etc/storage/openvpn/client/
 sed -i '$a' client.conf
 sed -i '$a### nocache' client.conf
@@ -107,7 +107,7 @@ sed -i '$a' dnsmasq.conf
 sed -i '$a### rublock' dnsmasq.conf
 sed -i '$aconf-file=/opt/etc/rublock.dnsmasq' dnsmasq.conf
 
-echo Add Crontab tasks
+echo Add crontab tasks
 cat >> /etc/storage/cron/crontabs/admin << 'EOF'
 0 5 * * * /opt/bin/rublock.sh
 EOF
