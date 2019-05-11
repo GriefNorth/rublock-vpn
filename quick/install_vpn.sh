@@ -17,7 +17,7 @@ modprobe ip_set_hash_net
 modprobe xt_set
 ipset -N rublock nethash
 
-echo Launch scripts
+echo Execute scripts
 chmod +x /opt/bin/blupdate.lua /opt/bin/rublock.sh
 rublock.sh
 
@@ -101,14 +101,14 @@ down)
 esac
 EOF
 
-echo Add entry dnsmasq
+echo Add entries dnsmasq
 cd /etc/storage/dnsmasq/
 sed -i '$a' dnsmasq.conf
 sed -i '$a### rublock' dnsmasq.conf
 sed -i '$aconf-file=/opt/etc/rublock.dnsmasq' dnsmasq.conf
 
 echo Add crontab tasks
-cat >> /etc/storage/cron/crontabs/admin << 'EOF'
+cat >> /etc/storage/cron/crontabs/$USER << 'EOF'
 0 5 * * * /opt/bin/rublock.sh
 EOF
 
