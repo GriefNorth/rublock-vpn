@@ -233,10 +233,10 @@ local retVal, retCode, url
 local output, bltables = cunstructTables()
 if config.blSource == "rublacklist" then
     output = ltn12.sink.chain(ltn12.filter.chain(rublacklistExtractDomains(), normalizeFqdn()), output)
-    url = "http://reestr.rublacklist.net/api/current"
+    url = "https://reestr.rublacklist.net/api/current"
 elseif config.blSource == "antizapret" then
     output = ltn12.sink.chain(ltn12.filter.chain(antizapretExtractDomains(), normalizeFqdn()), output)
-    url = "http://api.antizapret.info/group.php?data=domain"
+    url = "https://api.antizapret.info/group.php?data=domain"
 else
     error("blacklist source should be either 'rublacklist' or 'antizapret'")
 end
