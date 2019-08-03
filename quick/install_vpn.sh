@@ -1,3 +1,5 @@
+#!/bin/sh
+
 echo Check update
 opkg update && opkg upgrade
 
