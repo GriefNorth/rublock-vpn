@@ -55,20 +55,20 @@ esac
 EOF
 
 echo Add ipset modules
-cd /etc/storage/
-sed -i '$a' start_script.sh
-sed -i '$a### Example - load ipset modules' start_script.sh
-sed -i '$amodprobe ip_set_hash_net' start_script.sh
-sed -i '$amodprobe xt_set' start_script.sh
+cat >> /etc/storage/start_script.sh << 'EOF'
+
+### Load ipset modules
+modprobe ip_set_hash_net
+modprobe xt_set
+EOF
 
 echo Add options client
-cd /etc/storage/openvpn/client/
-sed -i '$a' client.conf
-sed -i '$a### nocache' client.conf
-sed -i '$aauth-nocache' client.conf
-sed -i '$a' client.conf
-sed -i '$a### noexec' client.conf
-sed -i '$aroute-noexec' client.conf
+cat >> /etc/storage/openvpn/client/client.conf << 'EOF'
+
+### User options
+auth-nocache
+route-noexec
+EOF
 
 echo Make vpnc script
 cat /dev/null > /etc/storage/vpnc_server_script.sh
@@ -104,10 +104,11 @@ esac
 EOF
 
 echo Add entries to dnsmasq
-cd /etc/storage/dnsmasq/
-sed -i '$a' dnsmasq.conf
-sed -i '$a### rublock' dnsmasq.conf
-sed -i '$aconf-file=/opt/etc/rublock.dnsmasq' dnsmasq.conf
+cat >> /etc/storage/dnsmasq/dnsmasq.conf << 'EOF'
+
+### rublock
+conf-file=/opt/etc/rublock.dnsmasq
+EOF
 
 echo Add crontab tasks
 cat >> /etc/storage/cron/crontabs/$USER << 'EOF'
