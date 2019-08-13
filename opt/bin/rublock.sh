@@ -7,10 +7,10 @@ echo Clear the list
 cd /opt/etc
 sed -i '/pornhub.com/d' rublock.dnsmasq
 sed -i '/youtube.com/d; /googleusercontent.com/d' rublock.dnsmasq
-sed -i '/vulkan/d; /wulkan/d; /vulcan/d' rublock.dnsmasq
-sed -i '/casino/d; /kasino/d; /azino/d' rublock.dnsmasq
-sed -i '/1xbet/d; /betcity/d; /leon/d; /fonbet/d' rublock.dnsmasq
-sed -i '/stavka/d; /slot/d; /dosug/d' rublock.dnsmasq
+sed -i '/lkan/d; /lcan/d; /1x/d' rublock.dnsmasq
+sed -i '/asino/d; /azino/d' rublock.dnsmasq
+sed -i '/bet/d; /city/d; /leon/d' rublock.dnsmasq
+sed -i '/stav/d; /slot/d; /dosug/d' rublock.dnsmasq
 
 echo Add custom sites
 sed -i '$aipset=\/nnm-club.ws\/rublock' rublock.dnsmasq
