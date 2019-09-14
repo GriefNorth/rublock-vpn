@@ -9,8 +9,8 @@ local config = {
     convertIdn = false,
     altNsLookups = false, -- отправлять DNS запросы заблокированных доменов через отдельный DNS
     blMinimumEntries = 1000, -- костыль если список получился короче, значит что-то пошло не так и конфиги не обновляем
-    dnsmasqConfigPath = "/opt/etc/rublock.dnsmasq",
-    ipsetConfigPath = "/opt/etc/rublock.ips",
+    dnsmasqConfigPath = "/opt/etc/rublock/rublock.dnsmasq",
+    ipsetConfigPath = "/opt/etc/rublock/rublock.ips",
     ipsetDns = "rublock",
     altDNSAddr = "8.8.8.8"
 }

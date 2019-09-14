@@ -4,7 +4,7 @@ echo List generation
 /opt/bin/blupdate.lua
 
 echo Clear the list
-cd /opt/etc
+cd /opt/etc/rublock
 sed -i '/pornhub.com/d' rublock.dnsmasq
 sed -i '/youtube.com/d; /googleusercontent.com/d' rublock.dnsmasq
 sed -i '/lkan/d; /lcan/d; /1x/d' rublock.dnsmasq
@@ -36,7 +36,7 @@ sed -i '$a149.154.172.0\/22' rublock.ips
 echo Add ip to table
 ipset flush rublock
 
-for IP in $(cat /opt/etc/rublock.ips) ; do
+for IP in $(cat /opt/etc/rublock/rublock.ips) ; do
 ipset -A rublock $IP
 done
 

@@ -7,7 +7,7 @@ echo Install packages
 opkg install lua
 
 echo Make directories
-mkdir -p /opt/lib/lua
+mkdir -p /opt/lib/lua /opt/etc/rublock
 
 echo Download scripts
 wget -O /opt/lib/lua/ltn12.lua https://raw.githubusercontent.com/diegonehab/luasocket/master/src/ltn12.lua
@@ -33,11 +33,11 @@ case "$1" in
 start|update)
         # add iptables custom rules
         echo "firewall started"
-        [ -d '/opt/etc' ] || exit 0
+        [ -d '/opt/etc/rublock' ] || exit 0
         # Create new rublock ipset and fill it with IPs from list
         if [ ! -z "$(ipset --swap rublock rublock 2>&1 | grep 'given name does not exist')" ] ; then
                 ipset -N rublock nethash
-                for IP in $(cat /opt/etc/rublock.ips) ; do
+                for IP in $(cat /opt/etc/rublock/rublock.ips) ; do
                         ipset -A rublock $IP
                 done
         fi
@@ -107,7 +107,7 @@ echo Add entries to dnsmasq
 cat >> /etc/storage/dnsmasq/dnsmasq.conf << 'EOF'
 
 ### rublock
-conf-file=/opt/etc/rublock.dnsmasq
+conf-file=/opt/etc/rublock/rublock.dnsmasq
 EOF
 
 echo Add crontab tasks
