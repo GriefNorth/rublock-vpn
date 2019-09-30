@@ -3,6 +3,16 @@
 echo List generation
 /opt/bin/blupdate.lua
 
+echo Add more resources
+# Sites
+wget -O /tmp/urlblock https://raw.githubusercontent.com/blackcofee/rublock-list/master/urlblock
+sed -i 's/.*/ipset=\/&\/rublock/' /tmp/urlblock
+cat /tmp/urlblock >> /opt/etc/rublock/rublock.dnsmasq
+
+# IP
+wget -O /tmp/ipblock https://raw.githubusercontent.com/blackcofee/rublock-list/master/ipblock
+cat /tmp/ipblock >> /opt/etc/rublock/rublock.ips
+
 echo Clear the list
 cd /opt/etc/rublock
 sed -i '/pornhub.com/d' rublock.dnsmasq
@@ -12,26 +22,14 @@ sed -i '/asino/d; /azino/d' rublock.dnsmasq
 sed -i '/bet/d; /city/d; /leon/d' rublock.dnsmasq
 sed -i '/stav/d; /slot/d; /dosug/d' rublock.dnsmasq
 
-echo Add custom sites
-sed -i '$aipset=\/nnm-club.ws\/rublock' rublock.dnsmasq
-sed -i '$aipset=\/gnome-look.org\/rublock' rublock.dnsmasq
-sed -i '$aipset=\/opendesktop.org\/rublock' rublock.dnsmasq
-sed -i '$aipset=\/pling.com\/rublock' rublock.dnsmasq
-sed -i '$aipset=\/7-zip.org\/rublock' rublock.dnsmasq
-sed -i '$aipset=\/reactos.org\/rublock' rublock.dnsmasq
-sed -i '$aipset=\/nextcloud.com\/rublock' rublock.dnsmasq
-sed -i '$aipset=\/git.openwrt.org\/rublock' rublock.dnsmasq
+### Add custom sites
+# cd /opt/etc/rublock/rublock.dnsmasq
+# sed -i '$aipset=\/example.com\/rublock' rublock.dnsmasq
 
-echo Add custom ip
-sed -i '$a91.108.4.0\/22' rublock.ips
-sed -i '$a91.108.8.0\/22' rublock.ips
-sed -i '$a91.108.12.0\/22' rublock.ips
-sed -i '$a91.108.16.0\/22' rublock.ips
-sed -i '$a91.108.56.0\/22' rublock.ips
-sed -i '$a149.154.160.0\/22' rublock.ips
-sed -i '$a149.154.164.0\/22' rublock.ips
-sed -i '$a149.154.168.0\/22' rublock.ips
-sed -i '$a149.154.172.0\/22' rublock.ips
+### Add custom ip
+# cd /opt/etc/rublock/rublock.dnsmasq
+# sed -i '$a127.0.0.1' rublock.ips
+# sed -i '$a127.0.0.1\/22' rublock.ips
 
 echo Add ip to table
 ipset flush rublock
