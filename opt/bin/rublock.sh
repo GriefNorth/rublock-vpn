@@ -23,11 +23,11 @@ sed -i '/bet/d; /city/d; /leon/d' rublock.dnsmasq
 sed -i '/stav/d; /slot/d; /dosug/d' rublock.dnsmasq
 
 ### Add custom sites
-# cd /opt/etc/rublock/rublock.dnsmasq
+# cd /opt/etc/rublock
 # sed -i '$aipset=\/example.com\/rublock' rublock.dnsmasq
 
 ### Add custom ip
-# cd /opt/etc/rublock/rublock.dnsmasq
+# cd /opt/etc/rublock
 # sed -i '$a127.0.0.1' rublock.ips
 # sed -i '$a127.0.0.1\/22' rublock.ips
 
