@@ -14,13 +14,9 @@ wget -O /tmp/ipblock https://raw.githubusercontent.com/blackcofee/rublock-list/m
 cat /tmp/ipblock >> /opt/etc/rublock/rublock.ips
 
 echo Clear the list
-cd /opt/etc/rublock
-sed -i '/pornhub.com/d' rublock.dnsmasq
-sed -i '/youtube.com/d; /googleusercontent.com/d' rublock.dnsmasq
-sed -i '/lkan/d; /lcan/d; /1x/d' rublock.dnsmasq
-sed -i '/asino/d; /azino/d' rublock.dnsmasq
-sed -i '/bet/d; /city/d; /leon/d' rublock.dnsmasq
-sed -i '/stav/d; /slot/d; /dosug/d' rublock.dnsmasq
+wget -O /tmp/clear.sh https://raw.githubusercontent.com/blackcofee/rublock-list/master/clear.sh
+chmod +x /tmp/clear.sh
+/tmp/clear.sh
 
 ### Add custom sites
 # sed -i '$aipset=\/example.com\/rublock' rublock.dnsmasq
