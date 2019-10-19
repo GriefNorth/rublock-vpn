@@ -18,7 +18,7 @@ wget -O /tmp/clear.sh https://raw.githubusercontent.com/blackcofee/rublock-list/
 chmod +x /tmp/clear.sh
 /tmp/clear.sh
 
-### Enterе to rublock
+### Enter to rublock
 cd /opt/etc/rublock
 
 ### Add custom sites
