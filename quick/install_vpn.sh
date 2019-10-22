@@ -10,9 +10,9 @@ echo Make directories
 mkdir -p /opt/lib/lua /opt/etc/rublock
 
 echo Download scripts
-wget -O /opt/lib/lua/ltn12.lua https://raw.githubusercontent.com/diegonehab/luasocket/master/src/ltn12.lua
-wget -O /opt/bin/blupdate.lua https://raw.githubusercontent.com/blackcofee/rublock-vpn/master/opt/bin/blupdate.lua
-wget -O /opt/bin/rublock.sh https://raw.githubusercontent.com/blackcofee/rublock-vpn/master/opt/bin/rublock.sh
+wget -q -O /opt/lib/lua/ltn12.lua https://raw.githubusercontent.com/diegonehab/luasocket/master/src/ltn12.lua
+wget -q -O /opt/bin/blupdate.lua https://raw.githubusercontent.com/blackcofee/rublock-vpn/master/opt/bin/blupdate.lua
+wget -q -O /opt/bin/rublock.sh https://raw.githubusercontent.com/blackcofee/rublock-vpn/master/opt/bin/rublock.sh
 
 echo Load ipset modules
 modprobe ip_set_hash_net
