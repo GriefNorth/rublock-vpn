@@ -5,16 +5,16 @@ echo List generation
 
 echo Add more resources
 # Sites
-wget -O /tmp/urlblock https://raw.githubusercontent.com/blackcofee/rublock-list/master/urlblock
+wget -q -O /tmp/urlblock https://raw.githubusercontent.com/blackcofee/rublock-list/master/urlblock
 sed -i 's/.*/ipset=\/&\/rublock/' /tmp/urlblock
 cat /tmp/urlblock >> /opt/etc/rublock/rublock.dnsmasq
 
 # IP
-wget -O /tmp/ipblock https://raw.githubusercontent.com/blackcofee/rublock-list/master/ipblock
+wget -q -O /tmp/ipblock https://raw.githubusercontent.com/blackcofee/rublock-list/master/ipblock
 cat /tmp/ipblock >> /opt/etc/rublock/rublock.ips
 
 echo Clear the list
-wget -O /tmp/clear.sh https://raw.githubusercontent.com/blackcofee/rublock-list/master/clear.sh
+wget  -q -O /tmp/clear.sh https://raw.githubusercontent.com/blackcofee/rublock-list/master/clear.sh
 chmod +x /tmp/clear.sh
 /tmp/clear.sh
 
