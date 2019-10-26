@@ -37,17 +37,6 @@ if not ltn12 then
     error("you need either install luasocket package (prefered) or put ltn12.lua in script dir")
 end
 
-local function hex2unicode(code)
-    local n = tonumber(code, 16)
-    if (n < 128) then
-        return string.char(n)
-    elseif (n < 2048) then
-        return string.char(192 + ((n - (n % 64)) / 64), 128 + (n % 64))
-    else
-        return string.char(224 + ((n - (n % 4096)) / 4096), 128 + (((n % 4096) - (n % 64)) / 64), 128 + (n % 64))
-    end
-end
-
 local function rublacklistExtractDomains()
     local currentRecord = ""
     local buffer = ""
