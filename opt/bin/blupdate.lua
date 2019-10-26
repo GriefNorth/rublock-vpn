@@ -1,7 +1,7 @@
 #!/opt/bin/lua
 
 local config = {
-    blSource = "antizapret", -- antizapret или rublacklist
+    blSource = "rublacklist", -- antizapret или rublacklist
     groupBySld = 16, -- количество поддоменов после которого в список вносится весь домен второго уровня целиком
     neverGroupMasks = { "^%a%a%a?.%a%a$" }, -- не распространять на org.ru, net.ua и аналогичные
     neverGroupDomains = { ["livejournal.com"] = true, ["facebook.com"] = true , ["vk.com"] = true },
@@ -54,48 +54,32 @@ local function rublacklistExtractDomains()
     local bufferPos = 1
     local streamEnded = false
     return function(chunk)
+        local haveOutput = 0
         local retVal = ""
         if chunk == nil then
             streamEnded = true
         else
             buffer = buffer .. chunk
         end
- 
-        while true do
-            local escapeStart, escapeEnd, escapedChar = buffer:find("\\(.)", bufferPos)
-            if escapedChar then
-                currentRecord = currentRecord .. buffer:sub(bufferPos, escapeStart - 1)
-                bufferPos = escapeEnd + 1
-                if escapedChar == "n" then
-                    retVal = currentRecord
-                    break
-                elseif escapedChar == "u" then
-                    currentRecord = currentRecord .. "\\u"
+        local newlinePosition = buffer:find("\n", bufferPos)
+        if newlinePosition then
+            currentRecord = currentRecord .. buffer:sub(bufferPos, newlinePosition - 1)
+            bufferPos = newlinePosition + 1
+            retVal = currentRecord
+        else
+            currentRecord = currentRecord .. buffer:sub(bufferPos, #buffer)
+            buffer = ""
+            bufferPos = 1
+            if streamEnded then
+                if currentRecord == "" then
+                    retVal = nil
                 else
-                    currentRecord = currentRecord .. escapedChar
+                    retVal = currentRecord
                 end
-            else
-                currentRecord = currentRecord .. buffer:sub(bufferPos, #buffer)
-                buffer = ""
-                bufferPos = 1
-                if streamEnded then
-                    if currentRecord == "" then
-                        retVal = nil
-                    else
-                        retVal = currentRecord
-                    end
-                end
-                break
             end
         end
         if retVal and (retVal ~= "") then
             currentRecord = ""
-            retVal = retVal:match("^[^;]*;([^;]+);[^;]*;[^;]*;[^;]*;[^;]*.*$")
-            if retVal then
-                retVal = retVal:gsub("\\u(%x%x%x%x)", hex2unicode)
-            else
-                retVal = ""
-            end
         end
         return (retVal)
     end
@@ -233,7 +217,7 @@ local retVal, retCode, url
 local output, bltables = cunstructTables()
 if config.blSource == "rublacklist" then
     output = ltn12.sink.chain(ltn12.filter.chain(rublacklistExtractDomains(), normalizeFqdn()), output)
-    url = "https://reestr.rublacklist.net/api/current"
+    url = "https://raw.githubusercontent.com/blackcofee/rublock-list/master/rublacklist"
 elseif config.blSource == "antizapret" then
     output = ltn12.sink.chain(ltn12.filter.chain(antizapretExtractDomains(), normalizeFqdn()), output)
     url = "https://api.antizapret.info/group.php?data=domain"
